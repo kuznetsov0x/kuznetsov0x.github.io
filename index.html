@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuznetsov | Links</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .glow {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Bubble animation */
+        .bubbles {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: rise 20s infinite linear;
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(0); opacity: 0; }
+            20% { opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        /* Button animations */
+        .social-btn {
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .social-btn:active {
+            transform: translateY(1px);
+            transition: all 0.1s ease;
+        }
+    </style>
+</head>
+<body class="bg-black text-white overflow-x-hidden">
+    <!-- Animated Background Bubbles -->
+    <div class="bubbles"></div>
+
+    <!-- Main Content Container -->
+    <main class="flex flex-col items-center justify-center min-h-screen px-4 py-8 space-y-6 relative z-10">
+        <!-- Profile Section -->
+        <section class="flex flex-col items-center space-y-4">
+            <img src="images/profile_picture.jpg" 
+                 alt="Profile Picture"
+                 class="w-32 h-32 rounded-full border-2 border-white glow floating 
+                        transition-transform duration-300 hover:scale-105">
+            
+            <div class="text-center space-y-1">
+                <h1 class="text-2xl font-bold hover:text-gray-300 transition-colors duration-300">
+                    Kuznetsov
+                </h1>
+                <p class="text-gray-400 text-sm italic">Bringing deserved ends to the unworthy.</p>
+            </div>
+        </section>
+
+        <!-- Social Buttons -->
+        <section class="w-full max-w-md space-y-4">
+            <!-- Instagram -->
+            <a href="https://instagram.com/yourusername" 
+               class="social-btn flex items-center justify-between px-6 py-4 
+                      bg-black/30 backdrop-blur-sm border border-white/10 
+                      rounded-xl hover:bg-white/5 group">
+                <div class="flex items-center space-x-3">
+                    <i data-feather="instagram" class="w-5 h-5"></i>
+                    <span>Instagram</span>
+                </div>
+                <i data-feather="arrow-up-right" class="w-4 h-4 text-white/30"></i>
+            </a>
+
+            <!-- Discord -->
+            <a href="https://discord.gg/yourlink" 
+               class="social-btn flex items-center justify-between px-6 py-4 
+                      bg-black/30 backdrop-blur-sm border border-white/10 
+                      rounded-xl hover:bg-white/5 group">
+                <div class="flex items-center space-x-3">
+                    <i data-feather="discord" class="w-5 h-5"></i>
+                    <span>Discord</span>
+                </div>
+                <i data-feather="arrow-up-right" class="w-4 h-4 text-white/30"></i>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://tiktok.com/@yourusername" 
+               class="social-btn flex items-center justify-between px-6 py-4 
+                      bg-black/30 backdrop-blur-sm border border-white/10 
+                      rounded-xl hover:bg-white/5 group">
+                <div class="flex items-center space-x-3">
+                    <i data-feather="video" class="w-5 h-5"></i>
+                    <span>TikTok</span>
+                </div>
+                <i data-feather="arrow-up-right" class="w-4 h-4 text-white/30"></i>
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://github.com/yourusername" 
+               class="social-btn flex items-center justify-between px-6 py-4 
+                      bg-black/30 backdrop-blur-sm border border-white/10 
+                      rounded-xl hover:bg-white/5 group">
+                <div class="flex items-center space-x-3">
+                    <i data-feather="github" class="w-5 h-5"></i>
+                    <span>GitHub</span>
+                </div>
+                <i data-feather="arrow-up-right" class="w-4 h-4 text-white/30"></i>
+            </a>
+
+            <!-- X (Twitter) -->
+            <a href="https://twitter.com/yourusername" 
+               class="social-btn flex items-center justify-between px-6 py-4 
+                      bg-black/30 backdrop-blur-sm border border-white/10 
+                      rounded-xl hover:bg-white/5 group">
+                <div class="flex items-center space-x-3">
+                    <i data-feather="twitter" class="w-5 h-5"></i>
+                    <span>X</span>
+                </div>
+                <i data-feather="arrow-up-right" class="w-4 h-4 text-white/30"></i>
+            </a>
+        </section>
+    </main>
+
+    <script>
+        feather.replace();
+        
+        function createBubbles() {
+            const bubblesContainer = document.querySelector('.bubbles');
+            const bubbleCount = 15;
+
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                
+                const size = Math.random() * 30 + 10;
+                const left = Math.random() * 100;
+                const delay = Math.random() * -20;
+                
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${left}%`;
+                bubble.style.animationDelay = `${delay}s`;
+                
+                bubblesContainer.appendChild(bubble);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createBubbles();
+            feather.replace();
+        });
+    </script>
+</body>
+  </html>
