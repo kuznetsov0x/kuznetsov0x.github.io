@@ -59,7 +59,7 @@
             transition: all 0.1s ease;
         }
 
-        .video-background {
+        .gif-background {
             position: fixed;
             top: 0;
             left: 0;
@@ -71,18 +71,11 @@
     </style>
 </head>
 <body class="bg-black text-white overflow-x-hidden">
-    <!-- Video Background -->
-    <video id="bg-video" class="video-background" autoplay muted loop playsinline>
-        <source src="output.gif" type="video/mp4">
-        Your browser does not support HTML5 video.
-    </video>
+    <img src="output.gif" class="gif-background">
 
-    <!-- Animated Bubbles -->
     <div class="bubbles"></div>
 
-    <!-- Main Content -->
     <main class="flex flex-col items-center justify-center min-h-screen px-4 py-8 space-y-6 relative z-10">
-        <!-- Profile Section -->
         <section class="flex flex-col items-center space-y-4">
             <img src="profile.gif" 
                  alt="Profile Picture"
@@ -97,7 +90,6 @@
             </div>
         </section>
 
-        <!-- Social Links -->
         <section class="w-full max-w-md space-y-4">
             <a href="https://instagram.com/kuznetsov0x" 
                class="social-btn flex items-center justify-between px-6 py-4 
@@ -159,64 +151,29 @@
     <script>
         feather.replace();
         
-        // Verifica se o vídeo está carregando e mostra mensagem de erro se necessário
-        document.addEventListener('DOMContentLoaded', function() {
-            const video = document.getElementById('bg-video');
-            
-            // Cria as bolhas animadas
-            function createBubbles() {
-                const bubblesContainer = document.querySelector('.bubbles');
-                const bubbleCount = 15;
+        function createBubbles() {
+            const bubblesContainer = document.querySelector('.bubbles');
+            const bubbleCount = 15;
 
-                for (let i = 0; i < bubbleCount; i++) {
-                    const bubble = document.createElement('div');
-                    bubble.className = 'bubble';
-                    
-                    const size = Math.random() * 30 + 10;
-                    const left = Math.random() * 100;
-                    const delay = Math.random() * -20;
-                    
-                    bubble.style.width = `${size}px`;
-                    bubble.style.height = `${size}px`;
-                    bubble.style.left = `${left}%`;
-                    bubble.style.animationDelay = `${delay}s`;
-                    
-                    bubblesContainer.appendChild(bubble);
-                }
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                
+                const size = Math.random() * 30 + 10;
+                const left = Math.random() * 100;
+                const delay = Math.random() * -20;
+                
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${left}%`;
+                bubble.style.animationDelay = `${delay}s`;
+                
+                bubblesContainer.appendChild(bubble);
             }
-            
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
             createBubbles();
-            
-            // Tenta carregar o vídeo automaticamente
-            function attemptPlay() {
-                video.play().catch(error => {
-                    console.log('Autoplay prevented:', error);
-                    // Mostra um botão para permitir que o usuário inicie o vídeo
-                    const playButton = document.createElement('button');
-                    playButton.textContent = 'Play Background';
-                    playButton.className = 'fixed bottom-4 right-4 bg-white text-black px-4 py-2 rounded z-50';
-                    playButton.onclick = function() {
-                        video.play();
-                        playButton.remove();
-                    };
-                    document.body.appendChild(playButton);
-                });
-            }
-            
-            // Verifica se o vídeo está carregado corretamente
-            video.onerror = function() {
-                console.error('Error loading video');
-            };
-            
-            // Tenta reproduzir quando o vídeo estiver carregado
-            video.onloadeddata = attemptPlay;
-            
-            // Alguns navegadores podem bloquear o autoplay sem interação do usuário
-            document.body.onclick = function() {
-                attemptPlay();
-                document.body.onclick = null;
-            };
-            
             feather.replace();
         });
     </script>
