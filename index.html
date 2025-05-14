@@ -81,17 +81,15 @@
     </style>
 </head>
 <body class="bg-black text-white overflow-x-hidden">
-    <video id="bg-video" class="video-background hidden" autoplay muted loop>
-        <source src="" type="video/mp4">
+    <video id="bg-video" class="video-background" autoplay muted loop>
+        <source src="background.mp4" type="video/mp4">
     </video>
-
-    <div id="bg-image" class="image-background hidden"></div>
 
     <div class="bubbles"></div>
 
     <main class="flex flex-col items-center justify-center min-h-screen px-4 py-8 space-y-6 relative z-10">
         <section class="flex flex-col items-center space-y-4">
-            <img id="profile-picture" src="profile.gif" 
+            <img src="profile.gif" 
                  alt="Profile Picture"
                  class="w-32 h-32 rounded-full border-2 border-white glow floating 
                         transition-transform duration-300 hover:scale-105 object-cover">
@@ -165,8 +163,6 @@
     <script>
         feather.replace();
         
-        const backgroundMediaPath = "background.mp4";
-        
         function createBubbles() {
             const bubblesContainer = document.querySelector('.bubbles');
             const bubbleCount = 15;
@@ -188,46 +184,10 @@
             }
         }
 
-        function loadBackground() {
-            if (!backgroundMediaPath) return;
-
-            const videoElement = document.getElementById('bg-video');
-            const imageElement = document.getElementById('bg-image');
-            const isVideo = backgroundMediaPath.endsWith('.mp4') || 
-                            backgroundMediaPath.endsWith('.webm') || 
-                            backgroundMediaPath.endsWith('.ogg');
-
-            if (isVideo) {
-                videoElement.querySelector('source').src = backgroundMediaPath;
-                videoElement.load();
-                
-                videoElement.onloadeddata = function() {
-                    videoElement.classList.remove('hidden');
-                };
-                
-                videoElement.onerror = function() {
-                    videoElement.classList.add('hidden');
-                };
-            } else {
-                const img = new Image();
-                img.onload = function() {
-                    imageElement.style.backgroundImage = `url('${backgroundMediaPath}')`;
-                    imageElement.style.backgroundSize = 'cover';
-                    imageElement.style.backgroundPosition = 'center';
-                    imageElement.classList.remove('hidden');
-                };
-                img.onerror = function() {
-                    imageElement.classList.add('hidden');
-                };
-                img.src = backgroundMediaPath;
-            }
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             createBubbles();
             feather.replace();
-            loadBackground();
         });
     </script>
 </body>
-</html>
+    </html>
